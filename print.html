@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Verify the installation - </title>
+        <title>Understaing android-glue - </title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,7 +48,7 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li class="affix"><a href="README.html">Introduction</a></li><li><a href="01-setup/README.html"><strong>1.</strong> Setting up a development environment</a></li><li><ul class="section"><li><a href="01-setup/verify.html"><strong>1.1.</strong> Verify the installation</a></li></ul></li></ul>
+            <ul class="chapter"><li class="affix"><a href="README.html">Introduction</a></li><li><a href="01-setup/README.html"><strong>1.</strong> Setting up a development environment</a></li><li><ul class="section"><li><a href="01-setup/verify.html"><strong>1.1.</strong> Verify the installation</a></li></ul></li><li><a href="02-interact/README.html"><strong>2.</strong> Interacting with the screen</a></li><li><a href="understanding-glue.html"><strong>3.</strong> Understaing android-glue</a></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -73,22 +73,93 @@
 <p>Create your Android applications with <a href="https://www.rust-lang.org/en-US/">Rust</a>!</p>
 </blockquote>
 <p>Looking at the Google Playstore top 1000 apps, the vast majority are using the Native Development Kit (NDK): today to build efficient and portable code is crucial for most mobile developers. Rust is rapidly becoming a point of reference for all those who want to build portable code that is safe and with high performance needs.</p>
-<p>This book introduces Android developers to use Rust within Android application using the NDK. Learn how to replace your C and C++ code, or how to write Rust code that live alongside them!</p>
+<p>This tutorial introduces Android developers to use Rust within Android application using:</p>
+<ul>
+<li>Android SDK+NDK</li>
+<li>Rust command <code>cargo apk</code> provided by <a href="https://github.com/tomaka/android-rs-glue">android-rs-glue</a>, to compile and package the Rust code into an Android apk</li>
+<li>Rust crate <code>android_glue</code>, also provided by <a href="https://github.com/tomaka/android-rs-glue">android-rs-glue</a>, to bind Rust code to the Android environment.</li>
+</ul>
+<p>The result of this tutorial will be a full screen application.</p>
 <a class="header" href="print.html#non-goals" id="non-goals"><h2>Non-goals</h2></a>
 <p>What's out of scope for this book:</p>
 <ul>
-<li>
-<p>Teaching Rust.</p>
-</li>
-<li>
-<p>Teaching Android.</p>
-</li>
+<li>Teaching Rust.</li>
+<li>Teaching Android.</li>
+<li>Interaction between Rust code and Android managed code (eg. written in Java or Kotlin).
+This feature in Android is achieved through the JNI (Java Native Interface), and it is covered in more detail in this <a href="https://github.com/kennytm/rust-ios-android">rust-ios-android tutorial</a> by kennytm.</li>
 </ul>
 <a class="header" href="print.html#thanks-to" id="thanks-to"><h2>Thanks to</h2></a>
-<p>Meetup Roma-Roma for revision and the great support .</p>
+<p>Meetup Roma-Roma for revision and the great support.</p>
 <p>Codemotion for the opportunity to talk about this project to a wonderful audience!</p>
+<a class="header" href="print.html#references" id="references"><h2>References</h2></a>
 <a class="header" href="print.html#setting-up-a-development-environment" id="setting-up-a-development-environment"><h1>Setting up a development environment</h1></a>
+<p>There are several ways to have everything you need for this tutorial.</p>
+<a class="header" href="print.html#with-docker-or-a-fresh-new-environment" id="with-docker-or-a-fresh-new-environment"><h2>With docker or a fresh new environment</h2></a>
+<p>The <a href="https://github.com/tomaka/android-rs-glue">android-rs-glue</a> tutorial walk you through setting the environment using a docker image or
+installing everything you need from scratch.</p>
+<a class="header" href="print.html#with-android-studio" id="with-android-studio"><h2>With Android Studio</h2></a>
+<p>If you have Android Studio installed you can leverage on all the stuff
+that Android Studio has already downloaded, avoiding sdk duplicates on your hard drive.</p>
+<blockquote>
+<p>Note: This tutorial has been tested on a mac. Everything should work fine on windows and linux,
+but not tested yet. Contributes are welcomed!</p>
+</blockquote>
+<ul>
+<li>install <a href="http://rustup.rs">rustup</a></li>
+<li>run <code>rustup target add arm-linux-androideabi</code>, or any other target that you want to compile to</li>
+<li>install <a href="https://gradle.org/install/">gradle</a></li>
+<li>install <code>cargo-apk</code> with <code>cargo install cargo-apk</code></li>
+</ul>
+<blockquote>
+<p>Please verify that cargo apk is v0.3.0+. If not, download the last version
+directly from github with the command <code>cargo install --git https://github.com/tomaka/android-rs-glue cargo-apk</code></p>
+</blockquote>
+<p>Now, Open <a href="https://developer.android.com/studio/index.html">Android Studio</a>, go to the SDK Manager and install the following:</p>
+<ul>
+<li>SDK platforms: Android 4.3, API Level 18</li>
+<li>SDK Tools
+<ul>
+<li>Build Tools version 26.0.1 (for cargo-apk)</li>
+<li>LLDB, CMake, NDK (for Android NDK)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Why Android API 18? Today, Rust’s arm-linux-androideabi target is built against
+that API level, and should theoretically be forwards-compatible with subsequent
+Android API levels. So it picks level 18 to get the greatest Android
+compatibility that Rust presently allows.</p>
+</blockquote>
+<p>On the top of this window there is the Android SDK Location; take note of this path.</p>
+<p>Set these two environment variables:</p>
+<ul>
+<li><code>ANDROID_HOME</code> to the path of the Android SDK location</li>
+<li><code>NDK_HOME</code> to the path: <code>$ANDROID_HOME/ndk-bundle</code></li>
+</ul>
 <a class="header" href="print.html#verify-the-installation" id="verify-the-installation"><h1>Verify the installation</h1></a>
+<p>To test the installation, you can use virtually any of your Rust project.</p>
+<blockquote>
+<p>Current limitation: the project has to contain a <em>single bin</em> target and
+no lib targets.</p>
+</blockquote>
+<p>To keep things simple, you can use this <a href="https://github.com/wbigger/rust-android-tutorial">sample application</a>, that it is just
+a new project with a console log output.</p>
+<p>In the root folder of this project run:</p>
+<p><code>cargo apk build</code></p>
+<p>If everything is ok, plug your Android device to your computer and install
+the application using:</p>
+<p><code>cargo apk install</code></p>
+<p>Now, show the Android log and filter our output:</p>
+<p><code>adb logcat | grep RustAndroidGlueStdouterr</code></p>
+<p>Open the application in your Android device. You should see a black screen and
+a log in the console.</p>
+<a class="header" href="print.html#interacting-with-the-screen" id="interacting-with-the-screen"><h1>Interacting with the screen</h1></a>
+<p>Dowload and install our <a href="https://github.com/wbigger/rust-android-tutorial">sample application</a>.</p>
+<p>We have a black screen on our app.</p>
+<p align="center">
+<img style="width: 50%" title="" src="assets/screenshot-black.png">
+</p>
+<a class="header" href="print.html#understaing-android-glue" id="understaing-android-glue"><h1>Understaing android-glue</h1></a>
 
                 </div>
 

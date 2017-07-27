@@ -2,12 +2,12 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Introduction - </title>
+        <title>Interacting with the screen - </title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <base href="">
+        <base href="../">
 
         <link rel="stylesheet" href="book.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -48,7 +48,7 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li class="affix"><a href="README.html" class="active">Introduction</a></li><li><a href="01-setup/README.html"><strong>1.</strong> Setting up a development environment</a></li><li><ul class="section"><li><a href="01-setup/verify.html"><strong>1.1.</strong> Verify the installation</a></li></ul></li><li><a href="02-interact/README.html"><strong>2.</strong> Interacting with the screen</a></li><li><a href="understanding-glue.html"><strong>3.</strong> Understaing android-glue</a></li></ul>
+            <ul class="chapter"><li class="affix"><a href="README.html">Introduction</a></li><li><a href="01-setup/README.html"><strong>1.</strong> Setting up a development environment</a></li><li><ul class="section"><li><a href="01-setup/verify.html"><strong>1.1.</strong> Verify the installation</a></li></ul></li><li><a href="02-interact/README.html" class="active"><strong>2.</strong> Interacting with the screen</a></li><li><a href="understanding-glue.html"><strong>3.</strong> Understaing android-glue</a></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -68,38 +68,24 @@
                 </div>
 
                 <div id="content" class="content">
-                    <a class="header" href="README.html#introduction" id="introduction"><h1>Introduction</h1></a>
-<blockquote>
-<p>Create your Android applications with <a href="https://www.rust-lang.org/en-US/">Rust</a>!</p>
-</blockquote>
-<p>Looking at the Google Playstore top 1000 apps, the vast majority are using the Native Development Kit (NDK): today to build efficient and portable code is crucial for most mobile developers. Rust is rapidly becoming a point of reference for all those who want to build portable code that is safe and with high performance needs.</p>
-<p>This tutorial introduces Android developers to use Rust within Android application using:</p>
-<ul>
-<li>Android SDK+NDK</li>
-<li>Rust command <code>cargo apk</code> provided by <a href="https://github.com/tomaka/android-rs-glue">android-rs-glue</a>, to compile and package the Rust code into an Android apk</li>
-<li>Rust crate <code>android_glue</code>, also provided by <a href="https://github.com/tomaka/android-rs-glue">android-rs-glue</a>, to bind Rust code to the Android environment.</li>
-</ul>
-<p>The result of this tutorial will be a full screen application.</p>
-<a class="header" href="README.html#non-goals" id="non-goals"><h2>Non-goals</h2></a>
-<p>What's out of scope for this book:</p>
-<ul>
-<li>Teaching Rust.</li>
-<li>Teaching Android.</li>
-<li>Interaction between Rust code and Android managed code (eg. written in Java or Kotlin).
-This feature in Android is achieved through the JNI (Java Native Interface), and it is covered in more detail in this <a href="https://github.com/kennytm/rust-ios-android">rust-ios-android tutorial</a> by kennytm.</li>
-</ul>
-<a class="header" href="README.html#thanks-to" id="thanks-to"><h2>Thanks to</h2></a>
-<p>Meetup Roma-Roma for revision and the great support.</p>
-<p>Codemotion for the opportunity to talk about this project to a wonderful audience!</p>
-<a class="header" href="README.html#references" id="references"><h2>References</h2></a>
+                    <a class="header" href="02-interact/README.html#interacting-with-the-screen" id="interacting-with-the-screen"><h1>Interacting with the screen</h1></a>
+<p>Dowload and install our <a href="https://github.com/wbigger/rust-android-tutorial">sample application</a>.</p>
+<p>We have a black screen on our app.</p>
+<p align="center">
+<img style="width: 50%" title="" src="assets/screenshot-black.png">
+</p>
 
                 </div>
 
                 <!-- Mobile navigation buttons -->
                 
+                    <a href="01-setup/verify.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
                 
-                    <a href="01-setup/README.html" class="mobile-nav-chapters next">
+                    <a href="understanding-glue.html" class="mobile-nav-chapters next">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -107,9 +93,13 @@ This feature in Android is achieved through the JNI (Java Native Interface), and
             </div>
 
             
+                <a href="01-setup/verify.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
 
             
-                <a href="01-setup/README.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                <a href="understanding-glue.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
                     <i class="fa fa-angle-right"></i>
                 </a>
             

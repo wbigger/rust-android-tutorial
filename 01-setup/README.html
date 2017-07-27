@@ -48,7 +48,7 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li class="affix"><a href="README.html">Introduction</a></li><li><a href="01-setup/README.html" class="active"><strong>1.</strong> Setting up a development environment</a></li><li><ul class="section"><li><a href="01-setup/verify.html"><strong>1.1.</strong> Verify the installation</a></li></ul></li></ul>
+            <ul class="chapter"><li class="affix"><a href="README.html">Introduction</a></li><li><a href="01-setup/README.html" class="active"><strong>1.</strong> Setting up a development environment</a></li><li><ul class="section"><li><a href="01-setup/verify.html"><strong>1.1.</strong> Verify the installation</a></li></ul></li><li><a href="02-interact/README.html"><strong>2.</strong> Interacting with the screen</a></li><li><a href="understanding-glue.html"><strong>3.</strong> Understaing android-glue</a></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -69,6 +69,49 @@
 
                 <div id="content" class="content">
                     <a class="header" href="01-setup/README.html#setting-up-a-development-environment" id="setting-up-a-development-environment"><h1>Setting up a development environment</h1></a>
+<p>There are several ways to have everything you need for this tutorial.</p>
+<a class="header" href="01-setup/README.html#with-docker-or-a-fresh-new-environment" id="with-docker-or-a-fresh-new-environment"><h2>With docker or a fresh new environment</h2></a>
+<p>The <a href="https://github.com/tomaka/android-rs-glue">android-rs-glue</a> tutorial walk you through setting the environment using a docker image or
+installing everything you need from scratch.</p>
+<a class="header" href="01-setup/README.html#with-android-studio" id="with-android-studio"><h2>With Android Studio</h2></a>
+<p>If you have Android Studio installed you can leverage on all the stuff
+that Android Studio has already downloaded, avoiding sdk duplicates on your hard drive.</p>
+<blockquote>
+<p>Note: This tutorial has been tested on a mac. Everything should work fine on windows and linux,
+but not tested yet. Contributes are welcomed!</p>
+</blockquote>
+<ul>
+<li>install <a href="http://rustup.rs">rustup</a></li>
+<li>run <code>rustup target add arm-linux-androideabi</code>, or any other target that you want to compile to</li>
+<li>install <a href="https://gradle.org/install/">gradle</a></li>
+<li>install <code>cargo-apk</code> with <code>cargo install cargo-apk</code></li>
+</ul>
+<blockquote>
+<p>Please verify that cargo apk is v0.3.0+. If not, download the last version
+directly from github with the command <code>cargo install --git https://github.com/tomaka/android-rs-glue cargo-apk</code></p>
+</blockquote>
+<p>Now, Open <a href="https://developer.android.com/studio/index.html">Android Studio</a>, go to the SDK Manager and install the following:</p>
+<ul>
+<li>SDK platforms: Android 4.3, API Level 18</li>
+<li>SDK Tools
+<ul>
+<li>Build Tools version 26.0.1 (for cargo-apk)</li>
+<li>LLDB, CMake, NDK (for Android NDK)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Why Android API 18? Today, Rust’s arm-linux-androideabi target is built against
+that API level, and should theoretically be forwards-compatible with subsequent
+Android API levels. So it picks level 18 to get the greatest Android
+compatibility that Rust presently allows.</p>
+</blockquote>
+<p>On the top of this window there is the Android SDK Location; take note of this path.</p>
+<p>Set these two environment variables:</p>
+<ul>
+<li><code>ANDROID_HOME</code> to the path of the Android SDK location</li>
+<li><code>NDK_HOME</code> to the path: <code>$ANDROID_HOME/ndk-bundle</code></li>
+</ul>
 
                 </div>
 

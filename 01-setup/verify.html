@@ -48,7 +48,7 @@
         </script>
 
         <div id="sidebar" class="sidebar">
-            <ul class="chapter"><li class="affix"><a href="README.html">Introduction</a></li><li><a href="01-setup/README.html"><strong>1.</strong> Setting up a development environment</a></li><li><ul class="section"><li><a href="01-setup/verify.html" class="active"><strong>1.1.</strong> Verify the installation</a></li></ul></li></ul>
+            <ul class="chapter"><li class="affix"><a href="README.html">Introduction</a></li><li><a href="01-setup/README.html"><strong>1.</strong> Setting up a development environment</a></li><li><ul class="section"><li><a href="01-setup/verify.html" class="active"><strong>1.1.</strong> Verify the installation</a></li></ul></li><li><a href="02-interact/README.html"><strong>2.</strong> Interacting with the screen</a></li><li><a href="understanding-glue.html"><strong>3.</strong> Understaing android-glue</a></li></ul>
         </div>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -69,6 +69,22 @@
 
                 <div id="content" class="content">
                     <a class="header" href="01-setup/verify.html#verify-the-installation" id="verify-the-installation"><h1>Verify the installation</h1></a>
+<p>To test the installation, you can use virtually any of your Rust project.</p>
+<blockquote>
+<p>Current limitation: the project has to contain a <em>single bin</em> target and
+no lib targets.</p>
+</blockquote>
+<p>To keep things simple, you can use this <a href="https://github.com/wbigger/rust-android-tutorial">sample application</a>, that it is just
+a new project with a console log output.</p>
+<p>In the root folder of this project run:</p>
+<p><code>cargo apk build</code></p>
+<p>If everything is ok, plug your Android device to your computer and install
+the application using:</p>
+<p><code>cargo apk install</code></p>
+<p>Now, show the Android log and filter our output:</p>
+<p><code>adb logcat | grep RustAndroidGlueStdouterr</code></p>
+<p>Open the application in your Android device. You should see a black screen and
+a log in the console.</p>
 
                 </div>
 
@@ -80,6 +96,10 @@
                 
 
                 
+                    <a href="02-interact/README.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
 
             </div>
 
@@ -89,6 +109,10 @@
                 </a>
             
 
+            
+                <a href="02-interact/README.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
             
 
         </div>
