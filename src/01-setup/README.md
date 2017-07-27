@@ -16,10 +16,14 @@ that Android Studio has already downloaded, avoiding sdk duplicates on your hard
 but not tested yet. Contributes are welcomed!
 
 
-First, set up Rust environment:
-- install [`rustup`](http://rustup.rs)
+
+- install [rustup](http://rustup.rs)
 - run `rustup target add arm-linux-androideabi`, or any other target that you want to compile to
 - install [gradle](https://gradle.org/install/)
+- install `cargo-apk` with `cargo install cargo-apk`
+
+> Please verify that cargo apk is v0.3.0+. If not, download the last version
+directly from github with the command `cargo install --git https://github.com/tomaka/android-rs-glue cargo-apk`
 
 Now, Open [Android Studio], go to the SDK Manager and install the following:
 - SDK platforms: Android 4.3, API Level 18
@@ -36,8 +40,6 @@ On the top of this window there is the Android SDK Location; take note of this p
 
 Set these two environment variables:
  - `ANDROID_HOME` to the path of the Android SDK location
- - `NDK_HOME` to the path: $ANDROID_HOME/ndk-bundle`
-
-That's all!
+ - `NDK_HOME` to the path: `$ANDROID_HOME/ndk-bundle`
 
 [Android Studio]:https://developer.android.com/studio/index.html
